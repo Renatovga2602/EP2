@@ -5,7 +5,6 @@
  */
 package model;
 
-import controler.ControleProduto;
 
 public class ModelProduto {
     
@@ -13,6 +12,11 @@ public class ModelProduto {
     private String tipo;
      private String quantidade;
      private String pesquisaprod;
+   //  private final int Identificador=0;
+
+  //  public int getIdentificador() {
+   //     return Identificador;
+   // }
 
     public String getPesquisaprod() {
         return pesquisaprod;

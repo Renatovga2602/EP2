@@ -23,7 +23,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     ModelUsuario mod = new ModelUsuario();
     ControleUsuario dao = new ControleUsuario();
      
-    ConexaoDB conecta = new ConexaoDB();
+    ConexaoDB conecta = new ConexaoDB();//variavel global
     
     int flag = 0;
     
@@ -310,7 +310,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jtConfirmaSenha.setEnabled(false);
         jcTipoUsuario.setEnabled(false);
         jbSalvarUsuario.setEnabled(false);
-        preencherTabela("select *from usuarios order by nome_usuario");
+        preencherTabela("select *from usuarios order by tipo_usuario");
         
 }else{
         
@@ -331,7 +331,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jcTipoUsuario.setEnabled(false);
         jbSalvarUsuario.setEnabled(false);
         
-        preencherTabela("select *from usuarios order by nome_usuario");
+        preencherTabela("select *from usuarios order by tipo_usuario");
         
     }
        

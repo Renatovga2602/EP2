@@ -5,17 +5,30 @@
  */
 package view;
 
+import controler.ConexaoDB;
+import controler.ControleBebida;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import model.ModelBebida;
+import model.ModelTable;
+
 /**
  *
  * @author renato
  */
 public class CadastroProduto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroProduto
-     */
+    ControleBebida bebi = new ControleBebida();
+    ModelBebida bebida = new ModelBebida();
+        ConexaoDB conecta = new ConexaoDB();//variavel global
+    
+    int IDBeb = 0;
     public CadastroProduto() {
         initComponents();
+        preencherTabela("select *from bebidas order by tipo_bebida");
+
     }
 
     /**
@@ -40,6 +53,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jExcluirProdutoBebida = new javax.swing.JButton();
         jVoltarProdutoBebida = new javax.swing.JButton();
         jEditarProdutoBebida = new javax.swing.JButton();
+        jbNovoBebidas = new javax.swing.JButton();
         jPanelSobremesa = new javax.swing.JPanel();
         jCselSobremesa = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -60,7 +74,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jCancelarProdutoComida = new javax.swing.JButton();
         jSalvarProdutoComida = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTableProdutoBebida1 = new javax.swing.JTable();
+        jTableProdutoComida = new javax.swing.JTable();
         jExcluirProdutoComida = new javax.swing.JButton();
         jVoltarProdutoComida = new javax.swing.JButton();
         jEditarProdutoComida = new javax.swing.JButton();
@@ -72,10 +86,12 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel4.setText("Tipo de Bebida:");
 
         jCselBebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a Bebida", "Coca-Cola\t", "Suquinho de maça", "Itubaína", " " }));
+        jCselBebida.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel6.setText("Quantidade:");
 
+        jtQuantidadeBebida.setEnabled(false);
         jtQuantidadeBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtQuantidadeBebidaActionPerformed(evt);
@@ -84,9 +100,16 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jCancelarProdutoBebida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jCancelarProdutoBebida.setText("Cancelar");
+        jCancelarProdutoBebida.setEnabled(false);
+        jCancelarProdutoBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCancelarProdutoBebidaActionPerformed(evt);
+            }
+        });
 
         jSalvarProdutoBebida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jSalvarProdutoBebida.setText("Salvar");
+        jSalvarProdutoBebida.setEnabled(false);
         jSalvarProdutoBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSalvarProdutoBebidaActionPerformed(evt);
@@ -104,6 +127,11 @@ public class CadastroProduto extends javax.swing.JFrame {
 
             }
         ));
+        jTableProdutoBebida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProdutoBebidaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableProdutoBebida);
 
         jExcluirProdutoBebida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -119,39 +147,59 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jEditarProdutoBebida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jEditarProdutoBebida.setText("Editar");
+        jEditarProdutoBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEditarProdutoBebidaActionPerformed(evt);
+            }
+        });
+
+        jbNovoBebidas.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jbNovoBebidas.setText("Novo ");
+        jbNovoBebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNovoBebidasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBebidaLayout = new javax.swing.GroupLayout(jPanelBebida);
         jPanelBebida.setLayout(jPanelBebidaLayout);
         jPanelBebidaLayout.setHorizontalGroup(
             jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBebidaLayout.createSequentialGroup()
+            .addGroup(jPanelBebidaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelBebidaLayout.createSequentialGroup()
-                        .addComponent(jCancelarProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jExcluirProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jEditarProdutoBebida, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jVoltarProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSalvarProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBebidaLayout.createSequentialGroup()
-                        .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCselBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtQuantidadeBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(43, 43, 43))
+                        .addComponent(jbNovoBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelBebidaLayout.createSequentialGroup()
+                        .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelBebidaLayout.createSequentialGroup()
+                                .addComponent(jCancelarProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jExcluirProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jEditarProdutoBebida, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jVoltarProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jSalvarProdutoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelBebidaLayout.createSequentialGroup()
+                                .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCselBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtQuantidadeBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(43, 43, 43))))
         );
         jPanelBebidaLayout.setVerticalGroup(
             jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBebidaLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap()
+                .addComponent(jbNovoBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jCselBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -168,7 +216,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addComponent(jExcluirProdutoBebida)
                     .addComponent(jVoltarProdutoBebida)
                     .addComponent(jEditarProdutoBebida))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         JtabelaPedido.addTab("Bebida", jPanelBebida);
@@ -298,7 +346,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jSalvarProdutoComida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jSalvarProdutoComida.setText("Salvar");
 
-        jTableProdutoBebida1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProdutoComida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -309,7 +357,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(jTableProdutoBebida1);
+        jScrollPane3.setViewportView(jTableProdutoComida);
 
         jExcluirProdutoComida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jExcluirProdutoComida.setText("Excluir");
@@ -373,13 +421,14 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCancelarProdutoComida)
-                    .addComponent(jSalvarProdutoComida)
+                .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jExcluirProdutoComida)
                         .addComponent(jVoltarProdutoComida)
-                        .addComponent(jEditarProdutoComida)))
+                        .addComponent(jEditarProdutoComida))
+                    .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jCancelarProdutoComida)
+                        .addComponent(jSalvarProdutoComida)))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -439,9 +488,151 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jEditarProdutoSobremesaActionPerformed
 
     private void jSalvarProdutoBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalvarProdutoBebidaActionPerformed
-        // TODO add your handling code here:
+       
+ if(jtQuantidadeBebida.getText().isEmpty()){
+
+    JOptionPane.showMessageDialog(null, "Preencha a Quantidade para continuar");
+    
+    jtQuantidadeBebida.requestFocus();//vai direto para nome
+
+    preencherTabela("select *from bebidas order by tipo_bebida");
+
+ }
+
+else       
+        
+if(IDBeb == 1){//update com dados alterados
+      
+        bebida.setTipoBebida((String) jCselBebida.getSelectedItem());
+        bebida.setQuantBebida(Integer.parseInt(jtQuantidadeBebida.getText()));
+        
+        bebi.Salvar(bebida);
+       //limoa as areas de texto:
+      
+        jtQuantidadeBebida.setText("");
+        
+        //bloqueia areas de texto:
+        jtQuantidadeBebida.setEnabled(false);
+        jCancelarProdutoBebida.setEnabled(false);
+        jCselBebida.setEnabled(false);
+        jExcluirProdutoBebida.setEnabled(true);
+        jEditarProdutoBebida.setEnabled(true);
+       
+       preencherTabela("select *from bebidas order by cod_bebida");
+}else{
+        
+        bebida.setTipoBebida((String) jCselBebida.getSelectedItem());
+        bebida.setQuantBebida(Integer.parseInt(jtQuantidadeBebida.getText()));
+    
+        bebi.Alterar(bebida); 
+        
+        jtQuantidadeBebida.setText("");
+        
+        //bloqueia areas de texto:
+        jtQuantidadeBebida.setEnabled(false);
+        jCancelarProdutoBebida.setEnabled(false);
+        jCselBebida.setEnabled(false);
+        jExcluirProdutoBebida.setEnabled(true);
+        jEditarProdutoBebida.setEnabled(true);
+       
+       preencherTabela("select *from bebidas order by cod_bebida");
+        
+    }
+ 
+ 
+ 
+ 
     }//GEN-LAST:event_jSalvarProdutoBebidaActionPerformed
 
+    private void jbNovoBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoBebidasActionPerformed
+       
+        IDBeb = 1;
+        jCselBebida.setEnabled(true);
+        jtQuantidadeBebida.setEnabled(true);
+        jCancelarProdutoBebida.setEnabled(true);
+         jEditarProdutoBebida.setEnabled(true);
+         jExcluirProdutoBebida.setEnabled(true);
+          jSalvarProdutoBebida.setEnabled(true);
+    }//GEN-LAST:event_jbNovoBebidasActionPerformed
+
+    private void jCancelarProdutoBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarProdutoBebidaActionPerformed
+        jCselBebida.setEnabled(false);
+        jtQuantidadeBebida.setEnabled(false);
+        jCancelarProdutoBebida.setEnabled(false);
+         jEditarProdutoBebida.setEnabled(false);
+         jExcluirProdutoBebida.setEnabled(false);
+          jSalvarProdutoBebida.setEnabled(false);
+    }//GEN-LAST:event_jCancelarProdutoBebidaActionPerformed
+
+    private void jEditarProdutoBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditarProdutoBebidaActionPerformed
+IDBeb = 2;
+        
+        jtQuantidadeBebida.setEnabled(true);
+       jSalvarProdutoBebida.setEnabled(true);
+     // preencherTabela("select *from bebidas order by quantidade_bebida");
+       jCselBebida.setEnabled(true);
+       
+    }//GEN-LAST:event_jEditarProdutoBebidaActionPerformed
+
+    private void jTableProdutoBebidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutoBebidaMouseClicked
+        
+         String tipo_bebida ="" + jTableProdutoBebida.getValueAt(jTableProdutoBebida.getSelectedRow(), 2);//pega valores da tabela;
+               conecta.conexao();
+               conecta.executaSql("select *from clientes where tipo_bebida='" + tipo_bebida +"'");   
+        
+        try {
+              
+               conecta.rs.first();
+               jtQuantidadeBebida.setText(String.valueOf(conecta.rs.getInt("quantidade_bebida")));
+              
+             
+               
+           } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null, "Erro ao selecionar dados" + ex);
+           }
+    }//GEN-LAST:event_jTableProdutoBebidaMouseClicked
+
+        public void preencherTabela(String Sql){
+       ArrayList dados = new ArrayList();
+       String [] colunas = new String []{"ID","Tipo de Bebida","Quantidade"};
+        conecta.conexao();
+        conecta.executaSql(Sql);
+        
+        try{
+            conecta.rs.first();
+            do{
+                dados.add(new Object[]{conecta.rs.getInt("cod_bebida"),conecta.rs.getString("tipo_bebida"),conecta.rs.getInt("quantidade_bebida")});
+            }while(conecta.rs.next());
+        }catch (SQLException ex){
+           JOptionPane.showMessageDialog(rootPane,"Busque Novamente "); 
+        }
+        ModelTable modelo = new ModelTable(dados, colunas);
+        jTableProdutoBebida.setModel(modelo);
+        jTableProdutoBebida.getColumnModel().getColumn(0).setPreferredWidth(67);
+        jTableProdutoBebida.getColumnModel().getColumn(0).setResizable(false);//usuario n pode aumentar tamanho da coluna
+        
+        jTableProdutoBebida.getColumnModel().getColumn(1).setPreferredWidth(330);
+        jTableProdutoBebida.getColumnModel().getColumn(1).setResizable(false);//usuario n pode aumentar nome na coluna
+       
+        jTableProdutoBebida.getColumnModel().getColumn(2).setPreferredWidth(120);
+        jTableProdutoBebida.getColumnModel().getColumn(2).setResizable(false);//usuario n pode aumentar telefone da coluna
+       
+        //jTableProdutoBebida.getColumnModel().getColumn(3).setPreferredWidth(220);
+        //jTableProdutoBebida.getColumnModel().getColumn(3).setResizable(false);//usuario n pode aumentar endereco da coluna
+       
+        jTableProdutoBebida.getTableHeader().setReorderingAllowed(false);
+        jTableProdutoBebida.setAutoResizeMode(jTableProdutoBebida.AUTO_RESIZE_OFF);//nao pode redimencionar tabela;
+        
+        jTableProdutoBebida.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//seleciona apenas um por vez na tabela
+        
+        
+        conecta.desconecta();
+        
+    }
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -507,13 +698,18 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableProdutoBebida;
-    private javax.swing.JTable jTableProdutoBebida1;
+    private javax.swing.JTable jTableProdutoComida;
     private javax.swing.JTable jTableProdutoSobremesa;
     private javax.swing.JButton jVoltarProdutoBebida;
     private javax.swing.JButton jVoltarProdutoComida;
     private javax.swing.JButton jVoltarProdutoSobremesa;
+    private javax.swing.JButton jbNovoBebidas;
     private javax.swing.JTextField jtQuantidadeBebida;
     private javax.swing.JTextField jtQuantidadeComida;
     private javax.swing.JTextField jtQuantidadeSobremesa;
     // End of variables declaration//GEN-END:variables
+
+   // private void preencherTabela(String select_from_bebidas_order_by_tipo_bebida) {
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   // }
 }
