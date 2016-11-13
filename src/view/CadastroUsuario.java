@@ -316,10 +316,9 @@ if(jtCadastroUsuario.getText().isEmpty()){
 }else if(jtConfirmaSenha.getText().isEmpty()) {
     JOptionPane.showMessageDialog(null, "Preencha o Confirmar Senha para continuar");
     
-    jtConfirmaSenha.requestFocus();
-
-}else       
-    if(flag == 1){//update com dados alterados
+    jtConfirmaSenha.requestFocus();}
+else if(jtSenhaUsuario.getText().equals(jtConfirmaSenha.getText())){
+        if(flag == 1){//update com dados alterados
         modu.setUsuNome(jtCadastroUsuario.getText());
         modu.setUsoTipo((String) jcTipoUsuario.getSelectedItem());
         modu.setUsoSenha(jtSenhaUsuario.getText());
@@ -339,7 +338,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jbSalvarUsuario.setEnabled(false);
         preencherTabela("select *from usuarios order by nome_usuario");
         
-}else{
+}else {
        
         modu.setUsoCod((Integer.parseInt(jtIDCadastroUser.getText())));
         modu.setUsuNome(jtCadastroUsuario.getText());
@@ -361,9 +360,10 @@ if(jtCadastroUsuario.getText().isEmpty()){
         
         preencherTabela("select *from usuarios order by nome_usuario");
         
-    }
-       
-        
+            }
+        }else{
+                JOptionPane.showMessageDialog(rootPane, "As senhas não Correspondem");
+                }   
     }//GEN-LAST:event_jbSalvarUsuarioActionPerformed
 
     private void jbPesquisarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarUsuarioActionPerformed
@@ -439,6 +439,10 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jbCancelarUsuario.setEnabled(false);
         jbAlterarUsuario.setEnabled(false);
         jbExcluirUsuario.setEnabled(false);
+        jtCadastroUsuario.setText("");
+        jtIDCadastroUser.setText("");
+        jtSenhaUsuario.setText("");
+        
     }//GEN-LAST:event_jbCancelarUsuarioActionPerformed
 
     private void jTableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioMouseClicked
@@ -463,6 +467,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
 conecta.desconecta();
 jbAlterarUsuario.setEnabled(true);
 jbExcluirUsuario.setEnabled(true);
+jbCancelarUsuario.setEnabled(true);
 
       
        
