@@ -70,6 +70,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         jExcluirProdutoSobremesa = new javax.swing.JButton();
         jVoltarProdutoSobremesa = new javax.swing.JButton();
         jEditarProdutoSobremesa = new javax.swing.JButton();
+        jbNovoSobremesa = new javax.swing.JButton();
+        jtPesquisaSobremesa = new javax.swing.JTextField();
+        jbPesquisaSobremesa = new javax.swing.JButton();
         jPanelComida = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jCselComida = new javax.swing.JComboBox<>();
@@ -82,6 +85,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         jExcluirProdutoComida = new javax.swing.JButton();
         jVoltarProdutoComida = new javax.swing.JButton();
         jEditarProdutoComida = new javax.swing.JButton();
+        jbNovoComida = new javax.swing.JButton();
+        jtPesquisaComida = new javax.swing.JTextField();
+        jbPesquisaComida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Produto");
@@ -318,38 +324,65 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        jbNovoSobremesa.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jbNovoSobremesa.setText("Novo ");
+        jbNovoSobremesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNovoSobremesaActionPerformed(evt);
+            }
+        });
+
+        jbPesquisaSobremesa.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jbPesquisaSobremesa.setText("Pesquisar");
+        jbPesquisaSobremesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPesquisaSobremesaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSobremesaLayout = new javax.swing.GroupLayout(jPanelSobremesa);
         jPanelSobremesa.setLayout(jPanelSobremesaLayout);
         jPanelSobremesaLayout.setHorizontalGroup(
             jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobremesaLayout.createSequentialGroup()
+            .addGroup(jPanelSobremesaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSobremesaLayout.createSequentialGroup()
-                        .addComponent(jCancelarProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jExcluirProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jEditarProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jVoltarProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSalvarProdutoSobremesa, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
-                    .addGroup(jPanelSobremesaLayout.createSequentialGroup()
-                        .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCselSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtQuantidadeSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(35, 35, 35))
+                        .addComponent(jbNovoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobremesaLayout.createSequentialGroup()
+                        .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelSobremesaLayout.createSequentialGroup()
+                                .addComponent(jtPesquisaSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbPesquisaSobremesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanelSobremesaLayout.createSequentialGroup()
+                                .addComponent(jCancelarProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jExcluirProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jEditarProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jVoltarProdutoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jSalvarProdutoSobremesa, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                            .addGroup(jPanelSobremesaLayout.createSequentialGroup()
+                                .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCselSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtQuantidadeSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(35, 35, 35))))
         );
         jPanelSobremesaLayout.setVerticalGroup(
             jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSobremesaLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap()
+                .addComponent(jbNovoSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCselSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -366,7 +399,11 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addComponent(jExcluirProdutoSobremesa)
                     .addComponent(jVoltarProdutoSobremesa)
                     .addComponent(jEditarProdutoSobremesa))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtPesquisaSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbPesquisaSobremesa))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         JtabelaPedido.addTab("Sobremesa", jPanelSobremesa);
@@ -423,6 +460,23 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        jbNovoComida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jbNovoComida.setText("Novo ");
+        jbNovoComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNovoComidaActionPerformed(evt);
+            }
+        });
+
+        jtPesquisaComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtPesquisaComidaActionPerformed(evt);
+            }
+        });
+
+        jbPesquisaComida.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jbPesquisaComida.setText("Pesquisar");
+
         javax.swing.GroupLayout jPanelComidaLayout = new javax.swing.GroupLayout(jPanelComida);
         jPanelComida.setLayout(jPanelComidaLayout);
         jPanelComidaLayout.setHorizontalGroup(
@@ -431,31 +485,44 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelComidaLayout.createSequentialGroup()
-                        .addComponent(jCancelarProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jExcluirProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jEditarProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jVoltarProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSalvarProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelComidaLayout.createSequentialGroup()
-                        .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCselComida, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtQuantidadeComida, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(41, 41, 41))
+                        .addComponent(jbNovoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComidaLayout.createSequentialGroup()
+                        .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelComidaLayout.createSequentialGroup()
+                                .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCselComida, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtQuantidadeComida, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelComidaLayout.createSequentialGroup()
+                                .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelComidaLayout.createSequentialGroup()
+                                        .addComponent(jCancelarProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jExcluirProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jEditarProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                        .addComponent(jVoltarProdutoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanelComidaLayout.createSequentialGroup()
+                                        .addComponent(jtPesquisaComida)
+                                        .addGap(27, 27, 27)))
+                                .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jbPesquisaComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jSalvarProdutoComida, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))))
+                        .addGap(41, 41, 41))))
         );
         jPanelComidaLayout.setVerticalGroup(
             jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelComidaLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap()
+                .addComponent(jbNovoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jCselComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -463,9 +530,9 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtQuantidadeComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jExcluirProdutoComida)
@@ -474,7 +541,11 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCancelarProdutoComida)
                         .addComponent(jSalvarProdutoComida)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(jPanelComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbPesquisaComida)
+                    .addComponent(jtPesquisaComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         JtabelaPedido.addTab("Comida", jPanelComida);
@@ -516,6 +587,7 @@ public class CadastroProduto extends javax.swing.JFrame {
          TelaPrincipal telacad = new TelaPrincipal();
       
         telacad.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jVoltarProdutoBebidaActionPerformed
 
     private void jVoltarProdutoComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarProdutoComidaActionPerformed
@@ -666,6 +738,22 @@ jExcluirProdutoBebida.setEnabled(true);
         
     }//GEN-LAST:event_jExcluirProdutoBebidaActionPerformed
 
+    private void jbNovoSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoSobremesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbNovoSobremesaActionPerformed
+
+    private void jbNovoComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoComidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbNovoComidaActionPerformed
+
+    private void jbPesquisaSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisaSobremesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbPesquisaSobremesaActionPerformed
+
+    private void jtPesquisaComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesquisaComidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtPesquisaComidaActionPerformed
+
         public void preencherTabela(String Sql){
        ArrayList dados = new ArrayList();
        String [] colunas = new String []{"ID","Tipo de Bebida","Quantidade"};
@@ -779,9 +867,15 @@ jExcluirProdutoBebida.setEnabled(true);
     private javax.swing.JButton jVoltarProdutoComida;
     private javax.swing.JButton jVoltarProdutoSobremesa;
     private javax.swing.JButton jbNovoBebidas;
+    private javax.swing.JButton jbNovoComida;
+    private javax.swing.JButton jbNovoSobremesa;
     private javax.swing.JButton jbPesquisaBebida;
+    private javax.swing.JButton jbPesquisaComida;
+    private javax.swing.JButton jbPesquisaSobremesa;
     private javax.swing.JTextField jtIDBebida;
     private javax.swing.JTextField jtPesquisaBebida;
+    private javax.swing.JTextField jtPesquisaComida;
+    private javax.swing.JTextField jtPesquisaSobremesa;
     private javax.swing.JTextField jtQuantidadeBebida;
     private javax.swing.JTextField jtQuantidadeComida;
     private javax.swing.JTextField jtQuantidadeSobremesa;

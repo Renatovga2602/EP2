@@ -62,6 +62,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jcTipoUsuario = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jtIDCadastroUser = new javax.swing.JTextField();
+        jbCadastroVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Usuário");
@@ -172,6 +173,14 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
+        jbCadastroVoltar.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jbCadastroVoltar.setText("Voltar");
+        jbCadastroVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastroVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,35 +188,33 @@ public class CadastroUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtSenhaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(jtCadastroUsuario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addGap(48, 48, 48)
+                        .addComponent(jtConfirmaSenha)
+                        .addGap(83, 83, 83))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtSenhaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                                    .addComponent(jtCadastroUsuario))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addGap(48, 48, 48)
-                                .addComponent(jtConfirmaSenha))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jtPesquisaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                                            .addComponent(jtPesquisaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jbNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
+                                                .addGap(39, 39, 39)
                                                 .addComponent(jbSalvarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jbCancelarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(134, 134, 134))
+                                        .addGap(18, 18, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(39, 39, 39)
@@ -216,13 +223,23 @@ public class CadastroUsuario extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(89, 89, 89)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcTipoUsuario, 0, 1, Short.MAX_VALUE)
+                                    .addComponent(jcTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jbAlterarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jbExcluirUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jbPesquisarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(83, 83, 83))))
+                                        .addGap(63, 63, 63)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jbAlterarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jbPesquisarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbExcluirUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(58, 58, 58))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbCadastroVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,10 +273,12 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jbExcluirUsuario))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbCadastroVoltar)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(700, 504));
+        setSize(new java.awt.Dimension(700, 564));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -447,6 +466,13 @@ jbExcluirUsuario.setEnabled(false);
        
     }//GEN-LAST:event_jTableUsuarioMouseClicked
 
+    private void jbCadastroVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastroVoltarActionPerformed
+         TelaPrincipal telacad = new TelaPrincipal();
+      
+        telacad.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jbCadastroVoltarActionPerformed
+
      public void preencherTabela(String Sql){
        ArrayList dados = new ArrayList();
        String [] colunas = new String []{"ID","Nome Usuario","Senha Usuário","Tipo Usuario"};
@@ -463,7 +489,7 @@ jbExcluirUsuario.setEnabled(false);
         }
         ModelTable modelo = new ModelTable(dados, colunas);
         jTableUsuario.setModel(modelo);
-        jTableUsuario.getColumnModel().getColumn(0).setPreferredWidth(28);
+        jTableUsuario.getColumnModel().getColumn(0).setPreferredWidth(32);
         jTableUsuario.getColumnModel().getColumn(0).setResizable(false);//usuario n pode aumentar tamanho da coluna
         
         jTableUsuario.getColumnModel().getColumn(1).setPreferredWidth(240);
@@ -532,6 +558,7 @@ jbExcluirUsuario.setEnabled(false);
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUsuario;
     private javax.swing.JButton jbAlterarUsuario;
+    private javax.swing.JButton jbCadastroVoltar;
     private javax.swing.JButton jbCancelarUsuario;
     private javax.swing.JButton jbExcluirUsuario;
     private javax.swing.JButton jbNovoUsuario;
