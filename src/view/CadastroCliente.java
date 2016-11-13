@@ -289,6 +289,7 @@ if(flag == 1){//update com dados alterados
         mod.setNome(jtCadastroNome.getText());
         mod.setTelefone(Integer.parseInt(jtCadastroTelefone.getText()));
         mod.setEndereco(jtCadastroEndereco.getText());
+        
         control.Salvar(mod);
        //limoa as areas de texto:
         jtCadastroNome.setText("");

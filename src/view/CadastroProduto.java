@@ -7,11 +7,13 @@ package view;
 
 import controler.ConexaoDB;
 import controler.ControleBebida;
+import controler.ControleSobremesa;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModelBebida;
+import model.ModelSobremesa;
 import model.ModelTable;
 
 /**
@@ -22,13 +24,18 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     ControleBebida dao = new ControleBebida();
     ModelBebida mod = new ModelBebida();
-        ConexaoDB conecta = new ConexaoDB();//variavel global
+    
+    ControleSobremesa daos = new ControleSobremesa();
+    ModelSobremesa mods = new ModelSobremesa();
+        
+    ConexaoDB conecta = new ConexaoDB();//variavel global
     
     int flag = 0;
+    int flagSobremesa = 0;
     public CadastroProduto() {
         initComponents();
         preencherTabela("select *from bebidas order by quantidade_bebida");
-
+        preencherTabelaS("select *from sobremesas order by quantidade_sobremesa");
     }
 
     /**
@@ -73,6 +80,8 @@ public class CadastroProduto extends javax.swing.JFrame {
         jbNovoSobremesa = new javax.swing.JButton();
         jtPesquisaSobremesa = new javax.swing.JTextField();
         jbPesquisaSobremesa = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jtIDSobre = new javax.swing.JTextField();
         jPanelComida = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jCselComida = new javax.swing.JComboBox<>();
@@ -191,7 +200,18 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        jtPesquisaBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtPesquisaBebidaActionPerformed(evt);
+            }
+        });
+
         jtIDBebida.setEnabled(false);
+        jtIDBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtIDBebidaActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel7.setText("ID:");
@@ -273,6 +293,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         JtabelaPedido.addTab("Bebida", jPanelBebida);
 
         jCselSobremesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a Sobremesa", "Pudim\t", "Casadin\t", "Beijinho", " " }));
+        jCselSobremesa.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setText("Tipo de Sobremesa:");
@@ -280,6 +301,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setText("Quantidade:");
 
+        jtQuantidadeSobremesa.setEnabled(false);
         jtQuantidadeSobremesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtQuantidadeSobremesaActionPerformed(evt);
@@ -288,9 +310,21 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jCancelarProdutoSobremesa.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jCancelarProdutoSobremesa.setText("Cancelar");
+        jCancelarProdutoSobremesa.setEnabled(false);
+        jCancelarProdutoSobremesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCancelarProdutoSobremesaActionPerformed(evt);
+            }
+        });
 
         jSalvarProdutoSobremesa.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jSalvarProdutoSobremesa.setText("Salvar");
+        jSalvarProdutoSobremesa.setEnabled(false);
+        jSalvarProdutoSobremesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalvarProdutoSobremesaActionPerformed(evt);
+            }
+        });
 
         jTableProdutoSobremesa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,10 +337,21 @@ public class CadastroProduto extends javax.swing.JFrame {
 
             }
         ));
+        jTableProdutoSobremesa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProdutoSobremesaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableProdutoSobremesa);
 
         jExcluirProdutoSobremesa.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jExcluirProdutoSobremesa.setText("Excluir");
+        jExcluirProdutoSobremesa.setEnabled(false);
+        jExcluirProdutoSobremesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jExcluirProdutoSobremesaActionPerformed(evt);
+            }
+        });
 
         jVoltarProdutoSobremesa.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jVoltarProdutoSobremesa.setText("Voltar");
@@ -318,6 +363,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jEditarProdutoSobremesa.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jEditarProdutoSobremesa.setText("Editar");
+        jEditarProdutoSobremesa.setEnabled(false);
         jEditarProdutoSobremesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jEditarProdutoSobremesaActionPerformed(evt);
@@ -339,6 +385,11 @@ public class CadastroProduto extends javax.swing.JFrame {
                 jbPesquisaSobremesaActionPerformed(evt);
             }
         });
+
+        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel8.setText("ID:");
+
+        jtIDSobre.setEnabled(false);
 
         javax.swing.GroupLayout jPanelSobremesaLayout = new javax.swing.GroupLayout(jPanelSobremesa);
         jPanelSobremesa.setLayout(jPanelSobremesaLayout);
@@ -372,9 +423,14 @@ public class CadastroProduto extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jCselSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtQuantidadeSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanelSobremesaLayout.createSequentialGroup()
+                                        .addComponent(jtQuantidadeSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtIDSobre)))))
                         .addGap(35, 35, 35))))
         );
         jPanelSobremesaLayout.setVerticalGroup(
@@ -389,7 +445,9 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(jPanelSobremesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtQuantidadeSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtQuantidadeSobremesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jtIDSobre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -601,7 +659,12 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jEditarProdutoComidaActionPerformed
 
     private void jEditarProdutoSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditarProdutoSobremesaActionPerformed
-        // TODO add your handling code here:
+       flagSobremesa = 2;
+        
+       jtQuantidadeSobremesa.setEnabled(true);
+       jSalvarProdutoSobremesa.setEnabled(true);
+     preencherTabelaS("select *from sobremesas order by quantidade_sobremesa");
+       jCselBebida.setEnabled(true);
     }//GEN-LAST:event_jEditarProdutoSobremesaActionPerformed
 
     private void jSalvarProdutoBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalvarProdutoBebidaActionPerformed
@@ -630,14 +693,16 @@ if(flag == 1){//update com dados alterados
         jEditarProdutoBebida.setEnabled(true);
         jExcluirProdutoBebida.setEnabled(true);
         
-        preencherTabela("select *from bebidas order by tipo_bebida");
+        preencherTabela("select *from bebidas order by cod_bebida");
         
 }  else{
-     mod.setTipoBebida((String)jCselBebida.getSelectedItem());
+    mod.setCodBebida((Integer.parseInt(jtIDBebida.getText()))); 
+    mod.setTipoBebida((String)jCselBebida.getSelectedItem());
         mod.setQuantBebida(Integer.parseInt(jtQuantidadeBebida.getText()));
        
         dao.Alterar(mod);
         
+       
         jtQuantidadeBebida.setText("");
        
         
@@ -647,7 +712,7 @@ if(flag == 1){//update com dados alterados
         jEditarProdutoBebida.setEnabled(true);
         jExcluirProdutoBebida.setEnabled(true);
         
-            preencherTabela("select *from bebidas order by tipo_bebida");
+            preencherTabela("select *from bebidas order by cod_bebida");
     } 
     }//GEN-LAST:event_jSalvarProdutoBebidaActionPerformed
 
@@ -677,7 +742,7 @@ flag = 2;
        jtQuantidadeBebida.setEnabled(true);
        jSalvarProdutoBebida.setEnabled(true);
      // preencherTabela("select *from bebidas order by quantidade_bebida");
-       jCselBebida.setEnabled(true);
+       //jCselBebida.setEnabled(true);
        
     }//GEN-LAST:event_jEditarProdutoBebidaActionPerformed
 
@@ -739,7 +804,13 @@ jExcluirProdutoBebida.setEnabled(true);
     }//GEN-LAST:event_jExcluirProdutoBebidaActionPerformed
 
     private void jbNovoSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoSobremesaActionPerformed
-        // TODO add your handling code here:
+         flagSobremesa = 1;
+        jCselSobremesa.setEnabled(true);
+        jtQuantidadeSobremesa.setEnabled(true);
+        jCancelarProdutoSobremesa.setEnabled(true);
+         jEditarProdutoSobremesa.setEnabled(false);
+         jExcluirProdutoSobremesa.setEnabled(false);
+          jSalvarProdutoSobremesa.setEnabled(true);
     }//GEN-LAST:event_jbNovoSobremesaActionPerformed
 
     private void jbNovoComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoComidaActionPerformed
@@ -747,12 +818,121 @@ jExcluirProdutoBebida.setEnabled(true);
     }//GEN-LAST:event_jbNovoComidaActionPerformed
 
     private void jbPesquisaSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisaSobremesaActionPerformed
-        // TODO add your handling code here:
+       mods.setPesquisaSobremesa(jtPesquisaSobremesa.getText());
+        ModelSobremesa model = daos.buscaSobremesa(mods);//envia por parametro o que o usuario digitou
+        jCselSobremesa.setSelectedItem(model.getTipoSobremesa());
+        jtQuantidadeSobremesa.setText(String.valueOf(model.getQuantSobremesa()));
+        jtIDSobre.setText(String.valueOf(model.getCodSobremesa()));
     }//GEN-LAST:event_jbPesquisaSobremesaActionPerformed
 
     private void jtPesquisaComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesquisaComidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesquisaComidaActionPerformed
+
+    private void jTableProdutoSobremesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutoSobremesaMouseClicked
+       
+         String tipo_sobremesa ="" + jTableProdutoSobremesa.getValueAt(jTableProdutoSobremesa.getSelectedRow(), 1);//pega valores da tabela;
+               conecta.conexao();
+               conecta.executaSql("select *from sobremesas where tipo_sobremesa='" + tipo_sobremesa +"'");   
+        
+        try {
+              
+               conecta.rs.first();
+               jtIDSobre.setText(String.valueOf(conecta.rs.getInt("cod_sobremesa")));
+               jCselSobremesa.setSelectedItem(conecta.rs.getString("tipo_sobremesa"));
+               jtQuantidadeSobremesa.setText(String.valueOf(conecta.rs.getInt("quantidade_sobremesa")));
+               
+               
+               
+               
+           } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null, "Erro ao selecionar dados" + ex);
+           }
+
+conecta.desconecta();
+jEditarProdutoSobremesa.setEnabled(true);
+jExcluirProdutoSobremesa.setEnabled(true);
+
+   
+    }//GEN-LAST:event_jTableProdutoSobremesaMouseClicked
+
+    private void jtIDBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDBebidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtIDBebidaActionPerformed
+
+    private void jCancelarProdutoSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarProdutoSobremesaActionPerformed
+       jCselSobremesa.setEnabled(false);
+        jtQuantidadeSobremesa.setEnabled(false);
+        jCancelarProdutoSobremesa.setEnabled(false);
+         jEditarProdutoSobremesa.setEnabled(false);
+         jExcluirProdutoSobremesa.setEnabled(false);
+          jSalvarProdutoSobremesa.setEnabled(false);
+    }//GEN-LAST:event_jCancelarProdutoSobremesaActionPerformed
+
+    private void jExcluirProdutoSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExcluirProdutoSobremesaActionPerformed
+        int resposta = 0;//guarda resposta do usuario
+        resposta = JOptionPane.showConfirmDialog(rootPane,"Deseja realmente Excluir ?");
+        
+       if(resposta == JOptionPane.YES_OPTION){
+           mods.setCodSobremesa(Integer.parseInt(jtIDSobre.getText()));
+            daos.Excluir(mods);
+        preencherTabelaS("select *from sobremesas order by tipo_sobremesa");
+        
+        jtQuantidadeSobremesa.setText("");
+        jtIDSobre.setText("");
+        }
+    }//GEN-LAST:event_jExcluirProdutoSobremesaActionPerformed
+
+    private void jSalvarProdutoSobremesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalvarProdutoSobremesaActionPerformed
+       if(jtQuantidadeSobremesa.getText().isEmpty()){
+
+    JOptionPane.showMessageDialog(null, "Preencha a Quantidade para continuar");
+    
+    jtQuantidadeSobremesa.requestFocus();//vai direto para quantidade
+
+
+}else       
+        
+if(flagSobremesa == 1){//update com dados alterados
+        mods.setTipoSobremesa((String)jCselSobremesa.getSelectedItem());
+        mods.setQuantSobremesa(Integer.parseInt(jtQuantidadeSobremesa.getText()));
+       
+        daos.Salvar(mods);
+       //limpa as areas de texto:
+        jtQuantidadeSobremesa.setText("");
+       
+        
+        //bloqueia areas de texto:
+        jCselSobremesa.setEnabled(false);
+        jtQuantidadeSobremesa.setEnabled(false);
+        jEditarProdutoSobremesa.setEnabled(true);
+        jExcluirProdutoSobremesa.setEnabled(true);
+        
+        preencherTabelaS("select *from sobremesas order by tipo_sobremesa");
+        
+}  else{
+    mods.setCodSobremesa((Integer.parseInt(jtIDSobre.getText())));  
+    mods.setTipoSobremesa((String)jCselSobremesa.getSelectedItem());
+        mods.setQuantSobremesa(Integer.parseInt(jtQuantidadeSobremesa.getText()));
+       
+        daos.Alterar(mods);
+        
+        jtQuantidadeSobremesa.setText("");
+       
+        
+        //bloqueia areas de texto:
+        jCselSobremesa.setEnabled(false);
+        jtQuantidadeSobremesa.setEnabled(false);
+        jEditarProdutoSobremesa.setEnabled(true);
+        jExcluirProdutoSobremesa.setEnabled(true);
+        
+            preencherTabelaS("select *from sobremesas order by tipo_sobremesa");
+    } 
+    }//GEN-LAST:event_jSalvarProdutoSobremesaActionPerformed
+
+    private void jtPesquisaBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesquisaBebidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtPesquisaBebidaActionPerformed
 
         public void preencherTabela(String Sql){
        ArrayList dados = new ArrayList();
@@ -792,6 +972,42 @@ jExcluirProdutoBebida.setEnabled(true);
         
     }
     
+     public void preencherTabelaS(String Sql){
+       ArrayList dados = new ArrayList();
+       String [] colunas = new String []{"ID","Tipo de Sobremesa","Quantidade"};
+        conecta.conexao();
+        conecta.executaSql(Sql);
+        
+        try{
+            conecta.rs.first();
+            do{
+                dados.add(new Object[]{conecta.rs.getInt("cod_sobremesa"),conecta.rs.getString("tipo_sobremesa"),conecta.rs.getInt("quantidade_sobremesa")});
+            }while(conecta.rs.next());
+        }catch (SQLException ex){
+           JOptionPane.showMessageDialog(rootPane,"Busque Novamente "); 
+        }
+        ModelTable modelo = new ModelTable(dados, colunas);
+        jTableProdutoSobremesa.setModel(modelo);
+        jTableProdutoSobremesa.getColumnModel().getColumn(0).setPreferredWidth(67);
+        jTableProdutoSobremesa.getColumnModel().getColumn(0).setResizable(false);//usuario n pode aumentar tamanho da coluna
+        
+        jTableProdutoSobremesa.getColumnModel().getColumn(1).setPreferredWidth(330);
+        jTableProdutoSobremesa.getColumnModel().getColumn(1).setResizable(false);//usuario n pode aumentar nome na coluna
+       
+        jTableProdutoSobremesa.getColumnModel().getColumn(2).setPreferredWidth(120);
+        jTableProdutoSobremesa.getColumnModel().getColumn(2).setResizable(false);//usuario n pode aumentar telefone da coluna
+       
+       //usuario n pode aumentar endereco da coluna
+       
+        jTableProdutoSobremesa.getTableHeader().setReorderingAllowed(false);
+        jTableProdutoSobremesa.setAutoResizeMode(jTableProdutoSobremesa.AUTO_RESIZE_OFF);//nao pode redimencionar tabela;
+        
+        jTableProdutoSobremesa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//seleciona apenas um por vez na tabela
+        
+        
+        conecta.desconecta();
+        
+    }
     
     
     
@@ -851,6 +1067,7 @@ jExcluirProdutoBebida.setEnabled(true);
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanelBebida;
     private javax.swing.JPanel jPanelComida;
     private javax.swing.JPanel jPanelSobremesa;
@@ -873,6 +1090,7 @@ jExcluirProdutoBebida.setEnabled(true);
     private javax.swing.JButton jbPesquisaComida;
     private javax.swing.JButton jbPesquisaSobremesa;
     private javax.swing.JTextField jtIDBebida;
+    private javax.swing.JTextField jtIDSobre;
     private javax.swing.JTextField jtPesquisaBebida;
     private javax.swing.JTextField jtPesquisaComida;
     private javax.swing.JTextField jtPesquisaSobremesa;

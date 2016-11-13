@@ -40,7 +40,7 @@ public class ControleSobremesa {
     conecta.conexao();
         
         try {
-            PreparedStatement pst = conecta.conect.prepareStatement("update bebidas set tipo_sobremesa=?,quantidade_sobremesa=? where cod_sobremesa=?");
+            PreparedStatement pst = conecta.conect.prepareStatement("update sobremesas set tipo_sobremesa=?,quantidade_sobremesa=? where cod_sobremesa=?");
         pst.setString(1, mod.getTipoSobremesa());
          pst.setInt(2, mod.getQuantSobremesa());
           pst.setInt(3, mod.getCodSobremesa());
@@ -74,7 +74,7 @@ public class ControleSobremesa {
     }  
     
        
-    public ModelSobremesa buscaBebida(ModelSobremesa mod){
+    public ModelSobremesa buscaSobremesa(ModelSobremesa mod){
         
         
             conecta.conexao();

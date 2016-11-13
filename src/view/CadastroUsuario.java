@@ -10,6 +10,8 @@ import controler.ControleUsuario;
 import static java.awt.SystemColor.control;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModelTable;
@@ -21,8 +23,8 @@ import model.ModelUsuario;
  */
 public class CadastroUsuario extends javax.swing.JFrame {
 
-    ModelUsuario mod = new ModelUsuario();
-    ControleUsuario dao = new ControleUsuario();
+    ModelUsuario modu = new ModelUsuario();
+    ControleUsuario daou = new ControleUsuario();
      
     ConexaoDB conecta = new ConexaoDB();//variavel global
     
@@ -188,21 +190,23 @@ public class CadastroUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtSenhaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                            .addComponent(jtCadastroUsuario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(48, 48, 48)
-                        .addComponent(jtConfirmaSenha)
-                        .addGap(83, 83, 83))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbCadastroVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtSenhaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                                    .addComponent(jtCadastroUsuario))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -225,21 +229,18 @@ public class CadastroUsuario extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(63, 63, 63)
+                                        .addGap(48, 48, 48)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jbPesquisarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jbAlterarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(jbPesquisarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                                .addComponent(jbAlterarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jbExcluirUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(58, 58, 58))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbCadastroVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(58, 58, 58))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,11 +320,11 @@ if(jtCadastroUsuario.getText().isEmpty()){
 
 }else       
     if(flag == 1){//update com dados alterados
-        mod.setUsuNome(jtCadastroUsuario.getText());
-        mod.setUsoTipo((String) jcTipoUsuario.getSelectedItem());
-        mod.setUsoSenha(jtSenhaUsuario.getText());
+        modu.setUsuNome(jtCadastroUsuario.getText());
+        modu.setUsoTipo((String) jcTipoUsuario.getSelectedItem());
+        modu.setUsoSenha(jtSenhaUsuario.getText());
         
-        dao.Salvar(mod);
+        daou.Salvar(modu);
        //limoa as areas de texto:
         jtSenhaUsuario.setText("");
         jtConfirmaSenha.setText("");
@@ -339,12 +340,13 @@ if(jtCadastroUsuario.getText().isEmpty()){
         preencherTabela("select *from usuarios order by nome_usuario");
         
 }else{
+       
+        modu.setUsoCod((Integer.parseInt(jtIDCadastroUser.getText())));
+        modu.setUsuNome(jtCadastroUsuario.getText());
+        modu.setUsoTipo((String) jcTipoUsuario.getSelectedItem());
+        modu.setUsoSenha(jtSenhaUsuario.getText());
         
-        mod.setUsuNome(jtCadastroUsuario.getText());
-        mod.setUsoTipo((String) jcTipoUsuario.getSelectedItem());
-        mod.setUsoSenha(jtSenhaUsuario.getText());
-        
-        dao.Alterar(mod); 
+        daou.Alterar(modu); 
         
          jtSenhaUsuario.setText("");
         jtConfirmaSenha.setText("");
@@ -368,8 +370,8 @@ if(jtCadastroUsuario.getText().isEmpty()){
         
         
             
-        mod.setUsuPesquisar(jtPesquisaUsuario.getText());
-        ModelUsuario model = dao.buscaUsuario(mod);//envia por parametro o que o usuario digitou
+        modu.setUsuPesquisar(jtPesquisaUsuario.getText());
+        ModelUsuario model = daou.buscaUsuario(modu);//envia por parametro o que o usuario digitou
          jtIDCadastroUser.setText(String.valueOf(model.getUsoCod()));
         jtCadastroUsuario.setText(model.getUsuNome());
         jtSenhaUsuario.setText(model.getUsoSenha());
@@ -378,7 +380,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jbAlterarUsuario.setEnabled(true);
        jbExcluirUsuario.setEnabled(true);
         
-        preencherTabela("select *from usuarios where nome_usuario like'%" + mod.getUsuPesquisar()+ "%'");
+        preencherTabela("select *from usuarios where nome_usuario like'%" + modu.getUsuPesquisar()+ "%'");
         
         
     }//GEN-LAST:event_jbPesquisarUsuarioActionPerformed
@@ -405,8 +407,8 @@ if(jtCadastroUsuario.getText().isEmpty()){
         int resposta = 0;//guarda resposta do usuario
         resposta = JOptionPane.showConfirmDialog(rootPane,"Deseja realmente Excluir ?");
         if(resposta == JOptionPane.YES_OPTION){
-            mod.setUsoCod(Integer.parseInt(jtIDCadastroUser.getText()));
-            dao.Excluir(mod);
+            modu.setUsoCod(Integer.parseInt(jtIDCadastroUser.getText()));
+            daou.Excluir(modu);
             
             
              
@@ -459,8 +461,8 @@ if(jtCadastroUsuario.getText().isEmpty()){
            }
 
 conecta.desconecta();
-jbAlterarUsuario.setEnabled(false);
-jbExcluirUsuario.setEnabled(false);
+jbAlterarUsuario.setEnabled(true);
+jbExcluirUsuario.setEnabled(true);
 
       
        
