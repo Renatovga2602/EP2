@@ -37,6 +37,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmcadastrousuario = new javax.swing.JMenuItem();
         jmSair = new javax.swing.JMenu();
         jmSairTela = new javax.swing.JMenuItem();
+        jmPedido = new javax.swing.JMenu();
+        jmRealPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +81,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmSair.add(jmSairTela);
 
         jMenuBar1.add(jmSair);
+
+        jmPedido.setText("Pedido");
+
+        jmRealPedido.setText("Realizar Pedido");
+        jmRealPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRealPedidoActionPerformed(evt);
+            }
+        });
+        jmPedido.add(jmRealPedido);
+
+        jMenuBar1.add(jmPedido);
 
         setJMenuBar(jMenuBar1);
 
@@ -123,6 +137,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmCadastroProdutoActionPerformed
 
+    private void jmRealPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRealPedidoActionPerformed
+ Pedido telaped = new Pedido();
+        jdpPrincipal.add(telaped);
+        telaped.setVisible(true);        
+    }//GEN-LAST:event_jmRealPedidoActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -162,6 +182,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmCadastro;
     private javax.swing.JMenuItem jmCadastroCliente;
     private javax.swing.JMenuItem jmCadastroProduto;
+    private javax.swing.JMenu jmPedido;
+    private javax.swing.JMenuItem jmRealPedido;
     private javax.swing.JMenu jmSair;
     private javax.swing.JMenuItem jmSairTela;
     private javax.swing.JMenuItem jmcadastrousuario;
