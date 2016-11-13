@@ -7,6 +7,7 @@ package view;
 
 import controler.ConexaoDB;
 import controler.ControleUsuario;
+import static java.awt.SystemColor.control;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -148,6 +149,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
             }
         ));
+        jTableUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUsuarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableUsuario);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -303,6 +309,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jtSenhaUsuario.setText("");
         jtConfirmaSenha.setText("");
         jtCadastroUsuario.setText("");
+        //jtIDCadastroUser.setText("");
         
         //bloqueia areas de texto:
         jtCadastroUsuario.setEnabled(false);
@@ -310,7 +317,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jtConfirmaSenha.setEnabled(false);
         jcTipoUsuario.setEnabled(false);
         jbSalvarUsuario.setEnabled(false);
-        preencherTabela("select *from usuarios order by tipo_usuario");
+        preencherTabela("select *from usuarios order by nome_usuario");
         
 }else{
         
@@ -331,7 +338,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jcTipoUsuario.setEnabled(false);
         jbSalvarUsuario.setEnabled(false);
         
-        preencherTabela("select *from usuarios order by tipo_usuario");
+        preencherTabela("select *from usuarios order by nome_usuario");
         
     }
        
@@ -350,7 +357,7 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jtConfirmaSenha.setText(model.getUsoSenha());
         jcTipoUsuario.setSelectedItem(model.getUsoTipo());
         jbAlterarUsuario.setEnabled(true);
-        jbExcluirUsuario.setEnabled(true);
+       jbExcluirUsuario.setEnabled(true);
         
         preencherTabela("select *from usuarios where nome_usuario like'%" + mod.getUsuPesquisar()+ "%'");
         
@@ -412,6 +419,33 @@ if(jtCadastroUsuario.getText().isEmpty()){
         jbAlterarUsuario.setEnabled(false);
         jbExcluirUsuario.setEnabled(false);
     }//GEN-LAST:event_jbCancelarUsuarioActionPerformed
+
+    private void jTableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioMouseClicked
+                String nome_usuario ="" + jTableUsuario.getValueAt(jTableUsuario.getSelectedRow(), 1);//pega valores da tabela;
+               conecta.conexao();
+               conecta.executaSql("select *from usuarios where nome_usuario='" + nome_usuario +"'");   
+        
+        try {
+              
+               conecta.rs.first();
+               jtSenhaUsuario.setText(String.valueOf(conecta.rs.getInt("senha_usuario")));
+               jtCadastroUsuario.setText(conecta.rs.getString("nome_usuario"));
+               jtConfirmaSenha.setText(String.valueOf(conecta.rs.getInt("senha_usuario")));
+               jtIDCadastroUser.setText(String.valueOf(conecta.rs.getInt("cod_usuario")));
+               
+               
+               
+           } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null, "Erro ao selecionar dados" + ex);
+           }
+
+conecta.desconecta();
+jbAlterarUsuario.setEnabled(false);
+jbExcluirUsuario.setEnabled(false);
+
+      
+       
+    }//GEN-LAST:event_jTableUsuarioMouseClicked
 
      public void preencherTabela(String Sql){
        ArrayList dados = new ArrayList();

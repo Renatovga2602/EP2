@@ -10,7 +10,7 @@ public class ModelProduto {
     
     
     private String tipo;
-     private String quantidade;
+     private Integer quantidade;
      private String pesquisaprod;
    //  private final int Identificador=0;
 
@@ -34,11 +34,11 @@ public class ModelProduto {
         this.tipo = tipo;
     }
 
-    public String getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
     

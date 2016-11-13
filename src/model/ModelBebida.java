@@ -11,7 +11,15 @@ public class ModelBebida {
     private Integer CodBebida;
     private String TipoBebida;
     private Integer QuantBebida;
+    private String PesquisaBebida;
 
+    public String getPesquisaBebida() {
+        return PesquisaBebida;
+    }
+
+    public void setPesquisaBebida(String PesquisaBebida) {
+        this.PesquisaBebida = PesquisaBebida;
+    }
    
 
     public Integer getCodBebida() {
