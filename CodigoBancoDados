@@ -1,0 +1,251 @@
+Dentro da tabela bebidas foram criadas as colunas ("cod_bebida","tipo_bebida","quantidade_bebida"):
+
+-- Table: public.bebidas
+
+-- DROP TABLE public.bebidas;
+
+CREATE TABLE public.bebidas
+(
+    cod_bebida integer NOT NULL DEFAULT nextval('bebidas_cod_bebida_seq'::regclass),
+    tipo_bebida character varying(25) COLLATE pg_catalog."default",
+    quantidade_bebida integer,
+    CONSTRAINT bebidas_pkey PRIMARY KEY (cod_bebida)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.bebidas
+    OWNER to postgres;
+-- Column: public.bebidas.cod_bebida
+
+-- ALTER TABLE public.bebidas DROP COLUMN cod_bebida;
+
+ALTER TABLE public.bebidas
+    ADD COLUMN cod_bebida integer NOT NULL DEFAULT nextval('bebidas_cod_bebida_seq'::regclass);
+-- Column: public.bebidas.tipo_bebida
+
+-- ALTER TABLE public.bebidas DROP COLUMN tipo_bebida;
+
+ALTER TABLE public.bebidas
+    ADD COLUMN tipo_bebida character varying(25) COLLATE pg_catalog."default";
+-- Column: public.bebidas.quantidade_bebida
+
+-- ALTER TABLE public.bebidas DROP COLUMN quantidade_bebida;
+
+ALTER TABLE public.bebidas
+    ADD COLUMN quantidade_bebida integer;
+--------------------------------------------------------------------------------------------------------------------------
+Dentro da tabela clientes foram criadas as colunas ("cod_cliente","nome_cliente","telefone_cliente","endereco_cliente"):
+
+-- Table: public.clientes
+
+-- DROP TABLE public.clientes;
+
+CREATE TABLE public.clientes
+(
+    cod_cliente integer NOT NULL DEFAULT nextval('clientes_cod_cliente_seq'::regclass),
+    nome_cliente character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    telefone_cliente integer NOT NULL,
+    endereco_cliente character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT clientes_pkey PRIMARY KEY (cod_cliente)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.clientes
+    OWNER to postgres;
+
+-- Column: public.clientes.cod_cliente
+
+-- ALTER TABLE public.clientes DROP COLUMN cod_cliente;
+
+ALTER TABLE public.clientes
+    ADD COLUMN cod_cliente integer NOT NULL DEFAULT nextval('clientes_cod_cliente_seq'::regclass);
+
+-- Column: public.clientes.nome_cliente
+
+-- ALTER TABLE public.clientes DROP COLUMN nome_cliente;
+
+ALTER TABLE public.clientes
+    ADD COLUMN nome_cliente character varying(50) COLLATE pg_catalog."default" NOT NULL;
+
+-- Column: public.clientes.telefone_cliente
+
+-- ALTER TABLE public.clientes DROP COLUMN telefone_cliente;
+
+ALTER TABLE public.clientes
+    ADD COLUMN telefone_cliente integer NOT NULL;
+
+-- Column: public.clientes.endereco_cliente
+
+-- ALTER TABLE public.clientes DROP COLUMN endereco_cliente;
+
+ALTER TABLE public.clientes
+    ADD COLUMN endereco_cliente character varying(50) COLLATE pg_catalog."default" NOT NULL;
+
+
+---------------------------------------------------------------------------------------------------
+
+
+Dentro da tabela usuarios foram criadas as colunas ("cod_usuario","nome_usuario","senha_usuario","tipo_cliente"):
+
+-- Table: public.usuarios
+
+-- DROP TABLE public.usuarios;
+
+CREATE TABLE public.usuarios
+(
+    cod_usuario integer NOT NULL DEFAULT nextval('usuarios_cod_usuario_seq'::regclass),
+    nome_usuario character varying(50) COLLATE pg_catalog."default",
+    senha_usuario character varying(50) COLLATE pg_catalog."default",
+    tipo_usuario character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT usuarios_pkey PRIMARY KEY (cod_usuario)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.usuarios
+    OWNER to postgres;
+
+-- Column: public.usuarios.cod_usuario
+
+-- ALTER TABLE public.usuarios DROP COLUMN cod_usuario;
+
+ALTER TABLE public.usuarios
+    ADD COLUMN cod_usuario integer NOT NULL DEFAULT nextval('usuarios_cod_usuario_seq'::regclass);
+
+-- Column: public.usuarios.nome_usuario
+
+-- ALTER TABLE public.usuarios DROP COLUMN nome_usuario;
+
+ALTER TABLE public.usuarios
+    ADD COLUMN nome_usuario character varying(50) COLLATE pg_catalog."default";
+
+-- Column: public.usuarios.senha_usuario
+
+-- ALTER TABLE public.usuarios DROP COLUMN senha_usuario;
+
+ALTER TABLE public.usuarios
+    ADD COLUMN senha_usuario character varying(50) COLLATE pg_catalog."default";
+
+
+-- Column: public.usuarios.tipo_usuario
+
+-- ALTER TABLE public.usuarios DROP COLUMN tipo_usuario;
+
+ALTER TABLE public.usuarios
+    ADD COLUMN tipo_usuario character varying(50) COLLATE pg_catalog."default";
+
+
+---------------------------------------------------------------------------------------------------
+
+
+Dentro da tabela comidas foram criadas as colunas ("cod_comida","tipo_comida","quantidade_comida"):
+
+-- Table: public.comidas
+
+-- DROP TABLE public.comidas;
+
+CREATE TABLE public.comidas
+(
+    cod_comida integer NOT NULL DEFAULT nextval('comidas_cod_comida_seq'::regclass),
+    tipo_comida character varying(30) COLLATE pg_catalog."default",
+    quantidade_comida integer,
+    CONSTRAINT comidas_pkey PRIMARY KEY (cod_comida)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.comidas
+    OWNER to postgres;
+
+-- Column: public.comidas.cod_comida
+
+-- ALTER TABLE public.comidas DROP COLUMN cod_comida;
+
+ALTER TABLE public.comidas
+    ADD COLUMN cod_comida integer NOT NULL DEFAULT nextval('comidas_cod_comida_seq'::regclass);
+
+-- Column: public.comidas.tipo_comida
+
+-- ALTER TABLE public.comidas DROP COLUMN tipo_comida;
+
+ALTER TABLE public.comidas
+    ADD COLUMN tipo_comida character varying(30) COLLATE pg_catalog."default";
+
+-- Column: public.comidas.quantidade_comida
+
+-- ALTER TABLE public.comidas DROP COLUMN quantidade_comida;
+
+ALTER TABLE public.comidas
+    ADD COLUMN quantidade_comida integer;
+
+---------------------------------------------------------------------------------------------------
+
+
+Dentro da tabela sobremesas foram criadas as colunas ("cod_sobremesa","tipo_sobremesa","quantidade_sobremesa"):
+
+-- Table: public.sobremesas
+
+-- DROP TABLE public.sobremesas;
+
+CREATE TABLE public.sobremesas
+(
+    cod_sobremesa integer NOT NULL DEFAULT nextval('sobremesas_cod_sobremesa_seq'::regclass),
+    tipo_sobremesa character varying(30) COLLATE pg_catalog."default",
+    quantidade_sobremesa integer,
+    CONSTRAINT sobremesas_pkey PRIMARY KEY (cod_sobremesa)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.sobremesas
+    OWNER to postgres;
+
+-- Column: public.sobremesas.cod_sobremesa
+
+-- ALTER TABLE public.sobremesas DROP COLUMN cod_sobremesa;
+
+ALTER TABLE public.sobremesas
+    ADD COLUMN cod_sobremesa integer NOT NULL DEFAULT nextval('sobremesas_cod_sobremesa_seq'::regclass);
+
+-- Column: public.sobremesas.tipo_sobremesa
+
+-- ALTER TABLE public.sobremesas DROP COLUMN tipo_sobremesa;
+
+ALTER TABLE public.sobremesas
+    ADD COLUMN tipo_sobremesa character varying(30) COLLATE pg_catalog."default";
+
+-- Column: public.sobremesas.quantidade_sobremesa
+
+-- ALTER TABLE public.sobremesas DROP COLUMN quantidade_sobremesa;
+
+ALTER TABLE public.sobremesas
+    ADD COLUMN quantidade_sobremesa integer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
