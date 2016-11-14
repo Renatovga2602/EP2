@@ -106,9 +106,9 @@
                   <Component id="jbNovoCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbEditarCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbExcluirCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbCancelarCadastro" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="jbCancelarCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

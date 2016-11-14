@@ -244,8 +244,8 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                     .addComponent(jbNovoCadastro)
                     .addComponent(jbEditarCadastro)
                     .addComponent(jbExcluirCadastro)
-                    .addComponent(jbCancelarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jbCancelarCadastro))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -384,7 +384,7 @@ if(flag == 1){//update com dados alterados
     }//GEN-LAST:event_jbPesqCliente3ActionPerformed
 
     private void jbCancelarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarCadastroActionPerformed
-        jbSalvarCadastro.setEnabled(true);
+        jbSalvarCadastro.setEnabled(false);
         jbEditarCadastro.setEnabled(false);
         jbExcluirCadastro.setEnabled(false);
         jtCadastroNome.setEnabled(!true);
@@ -471,6 +471,9 @@ if(flag == 1){//update com dados alterados
 conecta.desconecta();
 jbEditarCadastro.setEnabled(true);
 jbExcluirCadastro.setEnabled(true);
+jbCancelarCadastro.setEnabled(true);
+jbSalvarCadastro.setEnabled(false);
+jbNovoCadastro.setEnabled(false);
 
       
     }//GEN-LAST:event_jTabelaClienteMouseClicked

@@ -750,7 +750,8 @@ if(flag == 1){//update com dados alterados
         jEditarProdutoBebida.setEnabled(false);
         jExcluirProdutoBebida.setEnabled(false);
         jCselBebida.setEnabled(false);
-        jCancelarProdutoBebida.setEnabled(false);
+        jCancelarProdutoBebida.setEnabled(true);
+        jSalvarProdutoBebida.setEnabled(false);
         
         
         preencherTabela("select *from bebidas order by cod_bebida");
@@ -980,8 +981,10 @@ if(flagSobremesa == 1){//update com dados alterados
         //bloqueia areas de texto:
         jCselSobremesa.setEnabled(false);
         jtQuantidadeSobremesa.setEnabled(false);
-        jEditarProdutoSobremesa.setEnabled(true);
-        jExcluirProdutoSobremesa.setEnabled(true);
+        jEditarProdutoSobremesa.setEnabled(false);
+        jExcluirProdutoSobremesa.setEnabled(false);
+        jSalvarProdutoSobremesa.setEnabled(false);
+         jCancelarProdutoSobremesa.setEnabled(false);
         
         preencherTabelaS("select *from sobremesas order by tipo_sobremesa");
         
@@ -1090,7 +1093,8 @@ if(flagComida == 1){//update com dados alterados
         jtQuantidadeComida.setEnabled(false);
         jEditarProdutoComida.setEnabled(false);
         jExcluirProdutoComida.setEnabled(false);
-        
+        jCancelarProdutoComida.setEnabled(false);
+        jSalvarProdutoComida.setEnabled(false);
         
         preencherTabelaC("select *from comidas order by tipo_comida");
         
